@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>David Web</title>
+<style type="text/css">
+html,body{margin:0;padding:0}
+*{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
+body{background:#eef2f7;color:#14213d;font-family:"Trebuchet MS",Verdana,Arial,sans-serif;font-size:16px;line-height:1.55}
+a{color:#0077b6}
+.wrap{max-width:960px;margin:0 auto;padding:0 20px}
+.clear:after{content:"";display:table;clear:both}
+.clear{zoom:1}
+
+/* Barra superior */
+#top{background:#14213d;color:#fff;padding:14px 0}
+#top .logo{float:left;font-family:Georgia,"Times New Roman",serif;font-size:24px;font-weight:bold;color:#ffd166;text-decoration:none}
+#top ul{float:right;margin:0;padding:0;list-style:none}
+#top li{display:inline;margin-left:18px}
+#top li a{color:#fff;text-decoration:none;font-size:15px;padding-bottom:3px;border-bottom:2px solid #14213d}
+#top li a:hover{border-bottom-color:#ffd166}
+
+/* Portada */
+#hero{background:#14213d;background:-webkit-linear-gradient(top,#14213d,#1d3557);background:linear-gradient(to bottom,#14213d,#1d3557);color:#fff;padding:56px 0 64px}
+#hero .left{float:left;width:56%;padding-right:24px}
+#hero .right{float:right;width:44%}
+#hero h1{font-family:Georgia,"Times New Roman",serif;font-size:68px;line-height:1.02;margin:0 0 18px;color:#fff}
+#hero p.lead{font-size:19px;color:#cfe3f1;margin:0 0 26px;max-width:460px}
+.btn{display:inline-block;background:#ffd166;color:#14213d;font-weight:bold;text-decoration:none;padding:12px 24px;border:0;cursor:pointer;font-size:16px;font-family:inherit;-webkit-border-radius:4px;border-radius:4px}
+.btn:hover{background:#ffe29a}
+.btn2{background:transparent;color:#fff;border:2px solid #fff;margin-left:8px;padding:10px 22px}
+.btn2:hover{background:#fff;color:#14213d}
+
+/* Panel de diagnostico */
+#diag{background:#0b1429;border:2px solid #00b4d8;padding:20px;color:#e6f4fb;-webkit-border-radius:6px;border-radius:6px}
+#diag h2{margin:0 0 4px;font-size:15px;font-weight:bold;color:#00b4d8;font-family:Georgia,serif}
+#diag .clock{font-family:"Courier New",Courier,monospace;font-size:44px;color:#ffd166;margin:4px 0 12px}
+#diag table{width:100%;border-collapse:collapse;font-size:14px}
+#diag td{padding:6px 0;border-top:1px solid #24365f;vertical-align:top}
+#diag td.k{color:#9fb9cc;width:40%}
+.ok{color:#7bdc9a;font-weight:bold}
+.no{color:#ff8a80;font-weight:bold}
+
+/* Secciones */
+.sec{padding:56px 0}
+.sec h2{font-family:Georgia,"Times New Roman",serif;font-size:36px;margin:0 0 8px}
+.sec p.sub{margin:0 0 30px;color:#4a5a78;max-width:560px}
+.cols{margin:0 -10px}
+.col{float:left;width:33.333%;padding:0 10px}
+.card{background:#fff;border-top:6px solid #00b4d8;padding:22px 22px 18px;margin-bottom:20px;min-height:190px;-webkit-box-shadow:0 2px 0 #d3dce8;box-shadow:0 2px 0 #d3dce8}
+.card.y{border-top-color:#ffd166}
+.card.n{border-top-color:#14213d}
+.card h3{font-family:Georgia,serif;font-size:21px;margin:0 0 8px}
+.card p{margin:0;color:#34415c}
+
+/* Juego */
+#game{background:#fff;border-top:1px solid #d3dce8;border-bottom:1px solid #d3dce8}
+#game .box{max-width:520px;background:#14213d;color:#fff;padding:26px;-webkit-border-radius:6px;border-radius:6px}
+#game input{width:90px;padding:10px;font-size:20px;border:2px solid #00b4d8;background:#fff;color:#14213d;text-align:center;font-family:inherit;-webkit-border-radius:4px;border-radius:4px}
+#msg{min-height:52px;margin:16px 0 4px;font-size:18px;color:#ffd166}
+#info{font-size:14px;color:#9fb9cc}
+
+/* Contacto */
+.form label{display:block;font-weight:bold;margin:14px 0 4px}
+.form input,.form textarea{width:100%;max-width:520px;padding:10px;font-size:16px;border:2px solid #b9c6d8;font-family:inherit;background:#fff;color:#14213d}
+.form textarea{height:110px}
+#fmsg{margin-top:14px;font-weight:bold}
+
+#foot{background:#14213d;color:#9fb9cc;text-align:center;padding:26px 0;font-size:14px}
+#foot b{color:#ffd166}
+
+#top select{font-size:14px;padding:3px;background:#fff;color:#14213d;border:0}
+.tab{background:#fff;color:#14213d;border:2px solid #14213d;padding:8px 16px;margin:0 6px 6px 0;font-size:15px;font-family:inherit;cursor:pointer;-webkit-border-radius:4px;border-radius:4px}
+.tab.on{background:#14213d;color:#ffd166}
+canvas{display:block;max-width:100%;height:auto;border:2px solid #00b4d8;background:#0b1429;-ms-touch-action:none;touch-action:none}
+#cv-paint{background:#fff;border-color:#14213d;cursor:crosshair}
+.hud{margin-top:12px;font-size:18px}
+.hud b{color:#0077b6}
+.swc{display:inline-block;width:26px;height:26px;margin:0 6px 6px 0;border:3px solid #fff;-webkit-box-shadow:0 0 0 1px #14213d;box-shadow:0 0 0 1px #14213d;cursor:pointer;vertical-align:middle}
+.swc.on{border-color:#ffd166;-webkit-box-shadow:0 0 0 2px #14213d;box-shadow:0 0 0 2px #14213d}
+#p-size{display:inline-block;min-width:30px;text-align:center;font-weight:bold}
+.tools{margin-bottom:12px}
+.mc{display:inline-block;width:64px;height:64px;margin:0 6px 6px 0;background:#14213d;border:2px solid #14213d;font:bold 30px/60px Arial,sans-serif;text-align:center;cursor:pointer;vertical-align:top;-webkit-border-radius:4px;border-radius:4px}
+.mc.up{background:#fff}
+#mem{width:290px;max-width:100%}
+.news{background:#fff;border-left:6px solid #ffd166;padding:14px 20px;margin-bottom:16px;max-width:680px}
+.news .dt{font-size:13px;color:#4a5a78}
+.news h3{font-family:Georgia,serif;font-size:21px;margin:2px 0 6px}
+.news p{margin:0 0 8px;color:#34415c}
+@media (max-width:760px){
+ #top .logo,#top ul{float:none;display:block;text-align:center}
+ #top ul{margin-top:10px}
+ #top li{margin:0 9px}
+ #hero .left,#hero .right{float:none;width:100%;padding:0}
+ #hero .right{margin-top:30px}
+ #hero h1{font-size:50px}
+ .col{float:none;width:100%}
+ .card{min-height:0}
+}
+</style>
+</head>
+<body>
+
+<div id="top"><div class="wrap clear">
+ <a class="logo" href="#inicio">David Web</a>
+ <ul>
+  <li><a href="#juegos" data-t="nav_g">Juegos</a></li>
+  <li><a href="#paint" data-t="nav_p">Paint</a></li>
+  <li><a href="#noticias" data-t="nav_n">Noticias</a></li>
+  <li><a href="#contacto" data-t="nav_c">Contacto</a></li>
+  <li><select id="lang"><option>Español</option><option>English</option><option>Português</option><option>Français</option><option>Deutsch</option><option>Italiano</option><option>Русский</option><option>中文</option><option>日本語</option><option>한국어</option></select></li>
+ </ul>
+</div></div>
+
+<div id="inicio"><div id="hero"><div class="wrap clear">
+ <div class="left">
+  <h1>David Web</h1>
+  <p class="lead" data-t="lead"></p>
+  <a class="btn" href="#juegos" data-t="play">Jugar</a><a class="btn btn2" href="#paint">Paint</a>
+ </div>
+ <div class="right">
+  <div id="diag">
+   <h2 data-t="diag_t"></h2>
+   <div class="clock" id="clock">--:--:--</div>
+   <table>
+    <tr><td class="k">Browser</td><td id="d-nav">...</td></tr>
+    <tr><td class="k">Screen</td><td id="d-scr">...</td></tr>
+    <tr><td class="k">Canvas</td><td id="d-cv">...</td></tr>
+   </table>
+  </div>
+ </div>
+</div></div></div>
+
+<div class="sec" id="juegos"><div class="wrap">
+ <h2 data-t="nav_g">Juegos</h2>
+ <p class="sub" data-t="hint"></p>
+ <div class="tabs"><button class="tab on" id="t-snake" type="button">Snake</button><button class="tab" id="t-dash" type="button">Dash</button><button class="tab" id="t-pong" type="button">Pong</button><button class="tab" id="t-flap" type="button">Flappy</button><button class="tab" id="t-mem" type="button" data-t="g_mem">Memoria</button></div>
+ <canvas id="cv-snake" width="320" height="320"></canvas>
+ <canvas id="cv-dash" width="480" height="240" style="display:none"></canvas>
+ <canvas id="cv-pong" width="480" height="300" style="display:none"></canvas>
+ <canvas id="cv-flap" width="320" height="400" style="display:none"></canvas>
+ <div id="mwrap" style="display:none"><div id="mem"></div><div id="mmsg" style="font-weight:bold;color:#1b7f43;margin-top:6px"></div></div>
+ <div class="hud"><span data-t="score">Puntos</span>: <b id="score">0</b></div>
+</div></div>
+
+<div class="sec" id="paint" style="background:#fff;border-top:1px solid #d3dce8;border-bottom:1px solid #d3dce8"><div class="wrap">
+ <h2>Paint</h2>
+ <div class="tools">
+  <span id="sw"></span><br>
+  <button class="tab on" id="p-brush" type="button" data-t="brush">Pincel</button><button class="tab" id="p-erase" type="button" data-t="eraser">Borrador</button><button class="tab" id="p-minus" type="button">-</button><span id="p-size">6</span><button class="tab" id="p-plus" type="button" style="margin-left:6px">+</button><button class="tab" id="p-clear" type="button" data-t="clear">Limpiar</button>
+ </div>
+ <canvas id="cv-paint" width="560" height="320"></canvas>
+</div></div>
+
+<div class="sec" id="noticias"><div class="wrap">
+ <h2><span data-t="nav_n">Noticias</span> 2026</h2>
+ <p class="sub" id="news-note"></p>
+ <div id="news"></div>
+</div></div>
+
+<div class="sec" id="contacto" style="background:#fff;border-top:1px solid #d3dce8"><div class="wrap">
+ <h2 data-t="nav_c">Contacto</h2>
+ <div class="form">
+  <label for="f-name" data-t="c_name">Nombre</label><input type="text" id="f-name">
+  <label for="f-mail" data-t="c_mail">Correo</label><input type="text" id="f-mail">
+  <label for="f-txt" data-t="c_msg">Mensaje</label><textarea id="f-txt"></textarea>
+  <div style="margin-top:16px"><button class="btn" id="send" type="button" style="background:#14213d;color:#ffd166" data-t="c_send">Enviar</button></div>
+  <div id="fmsg"></div>
+ </div>
+</div></div>
+
+<div id="foot"><b>David Web</b></div>
+
+<script type="text/javascript">
+(function () {
+  var d = document;
+  function $(id) { return d.getElementById(id); }
+  function on(el, ev, fn) {
+    if (el.addEventListener) { el.addEventListener(ev, fn, false); }
+    else if (el.attachEvent) { el.attachEvent("on" + ev, function () { fn.call(el, window.event); }); }
+  }
+  function pd(e) { if (e.preventDefault) { e.preventDefault(); } else { e.returnValue = false; } }
+  function st(el, t) { if (el.textContent !== undefined) { el.textContent = t; } else { el.innerText = t; } }
+  function pad(n) { return (n < 10 ? "0" : "") + n; }
+
+  /* ---------- Idiomas: es en pt fr de it ru zh ja ko ---------- */
+  var L = ["es", "en", "pt", "fr", "de", "it", "ru", "zh", "ja", "ko"], li = 0;
+  var T = {
+    lead: ["Una página hecha para que funcione en cualquier navegador, hasta en Internet Explorer y el viejo Samsung Browser de 2015.", "A page built to work in any browser, even Internet Explorer and the old 2015 Samsung Browser.", "Uma página feita para funcionar em qualquer navegador, até no Internet Explorer e no velho Samsung Browser de 2015.", "Une page conçue pour fonctionner sur tous les navigateurs, même Internet Explorer et l'ancien Samsung Browser de 2015.", "Eine Seite, die in jedem Browser läuft, sogar im Internet Explorer und im alten Samsung Browser von 2015.", "Una pagina fatta per funzionare su qualsiasi browser, anche Internet Explorer e il vecchio Samsung Browser del 2015.", "Страница, которая работает в любом браузере, даже в Internet Explorer и старом Samsung Browser 2015 года.", "一个能在任何浏览器上运行的网页，包括 Internet Explorer 和 2015 年的旧版三星浏览器。", "どのブラウザでも動くページ。Internet Explorer や 2015 年の古い Samsung ブラウザでも大丈夫です。", "어떤 브라우저에서도 작동하는 페이지입니다. Internet Explorer와 2015년 구형 삼성 브라우저에서도 됩니다."],
+    play: ["Jugar", "Play", "Jogar", "Jouer", "Spielen", "Gioca", "Играть", "开始玩", "遊ぶ", "플레이"],
+    nav_g: ["Juegos", "Games", "Jogos", "Jeux", "Spiele", "Giochi", "Игры", "游戏", "ゲーム", "게임"],
+    nav_p: "Paint",
+    nav_c: ["Contacto", "Contact", "Contato", "Contact", "Kontakt", "Contatti", "Контакты", "联系", "連絡先", "연락처"],
+    diag_t: ["Tu navegador, en vivo", "Your browser, live", "Seu navegador, ao vivo", "Votre navigateur, en direct", "Dein Browser, live", "Il tuo browser, dal vivo", "Ваш браузер сейчас", "你的浏览器（实时）", "あなたのブラウザ（ライブ）", "내 브라우저 (실시간)"],
+    score: ["Puntos", "Score", "Pontos", "Score", "Punkte", "Punti", "Очки", "得分", "スコア", "점수"],
+    hint: ["Flechas, espacio, toque o mouse, según el juego.", "Arrow keys, space, tap or mouse, depending on the game.", "Setas, espaço, toque ou mouse, conforme o jogo.", "Flèches, espace, toucher ou souris, selon le jeu.", "Pfeiltasten, Leertaste, Tippen oder Maus, je nach Spiel.", "Frecce, spazio, tocco o mouse, a seconda del gioco.", "Стрелки, пробел, касание или мышь — в зависимости от игры.", "根据游戏使用方向键、空格、触摸或鼠标。", "ゲームに応じて、矢印キー・スペース・タップ・マウスで操作します。", "게임에 따라 방향키, 스페이스바, 터치 또는 마우스를 사용하세요."],
+    start: ["Toca para empezar", "Tap to start", "Toque para começar", "Touchez pour commencer", "Tippen zum Start", "Tocca per iniziare", "Нажмите, чтобы начать", "点击开始", "タップで開始", "탭하여 시작"],
+    over: ["Fin del juego", "Game over", "Fim de jogo", "Partie terminée", "Spiel vorbei", "Fine partita", "Игра окончена", "游戏结束", "ゲームオーバー", "게임 오버"],
+    brush: ["Pincel", "Brush", "Pincel", "Pinceau", "Pinsel", "Pennello", "Кисть", "画笔", "ブラシ", "브러시"],
+    eraser: ["Borrador", "Eraser", "Borracha", "Gomme", "Radierer", "Gomma", "Ластик", "橡皮", "消しゴム", "지우개"],
+    clear: ["Limpiar", "Clear", "Limpar", "Effacer", "Leeren", "Cancella", "Очистить", "清空", "全消去", "모두 지우기"],
+    c_name: ["Nombre", "Name", "Nome", "Nom", "Name", "Nome", "Имя", "姓名", "名前", "이름"],
+    c_mail: ["Correo", "Email", "E-mail", "E-mail", "E-Mail", "Email", "Почта", "邮箱", "メール", "이메일"],
+    c_msg: ["Mensaje", "Message", "Mensagem", "Message", "Nachricht", "Messaggio", "Сообщение", "留言", "メッセージ", "메시지"],
+    c_send: ["Enviar mensaje", "Send message", "Enviar mensagem", "Envoyer", "Nachricht senden", "Invia messaggio", "Отправить", "发送留言", "送信", "보내기"],
+    c_ok: ["Gracias. Tu mensaje quedó listo (esta demo no lo envía).", "Thanks. Your message is ready (this demo does not send it).", "Obrigado. Sua mensagem está pronta (esta demonstração não a envia).", "Merci. Votre message est prêt (cette démo ne l'envoie pas).", "Danke. Deine Nachricht ist fertig (diese Demo sendet sie nicht).", "Grazie. Il messaggio è pronto (questa demo non lo invia).", "Спасибо. Сообщение готово (демо его не отправляет).", "谢谢。留言已就绪（此演示不会发送）。", "ありがとう。メッセージの準備ができました（このデモでは送信されません）。", "감사합니다. 메시지가 준비되었습니다(이 데모는 전송하지 않습니다)."],
+    nav_n: ["Noticias", "News", "Notícias", "Actualités", "Nachrichten", "Notizie", "Новости", "新闻", "ニュース", "뉴스"],
+    src: ["Fuente", "Source", "Fonte", "Source", "Quelle", "Fonte", "Источник", "来源", "出典", "출처"],
+    g_mem: ["Memoria", "Memory", "Memória", "Mémoire", "Memory", "Memory", "Память", "记忆", "神経衰弱", "기억력"],
+    won: ["¡Ganaste!", "You win!", "Você venceu!", "Gagné !", "Gewonnen!", "Hai vinto!", "Победа!", "你赢了！", "クリア！", "승리!"],
+    c_err: ["Completa nombre, correo válido y mensaje.", "Fill in your name, a valid email and a message.", "Preencha nome, e-mail válido e mensagem.", "Renseignez nom, e-mail valide et message.", "Gib Namen, gültige E-Mail und Nachricht ein.", "Inserisci nome, email valida e messaggio.", "Укажите имя, верную почту и сообщение.", "请填写姓名、有效邮箱和留言。", "名前、有効なメール、メッセージを入力してください。", "이름, 올바른 이메일, 메시지를 입력하세요."]
+  };
+  var NEWS = [
+    { d: "2026-07-19", s: "FIFA", u: "https://inside.fifa.com/organisation/news/spain-crowned-world-cup-2026-champions-new-york-new-jersey",
+      es: ["España gana el Mundial 2026", "España venció 1-0 a Argentina en la prórroga, con gol de Ferran Torres en el minuto 106, y se coronó por segunda vez. La final se jugó en Nueva Jersey."],
+      en: ["Spain win the 2026 World Cup", "Spain beat Argentina 1-0 in extra time, with Ferran Torres scoring in the 106th minute, to win their second title. The final was played in New Jersey."] },
+    { d: "2026-06-09", s: "Anthropic", u: "https://www.anthropic.com/news/fable-mythos-access",
+      es: ["Llegan Claude Fable 5 y Mythos 5", "Anthropic los lanzó el 9 de junio. El acceso se suspendió el 12 de junio por controles de exportación de EE. UU. y volvió el 1 de julio."],
+      en: ["Claude Fable 5 and Mythos 5 arrive", "Anthropic released them on June 9. Access was suspended on June 12 because of U.S. export controls and restored on July 1."] },
+    { d: "2026-04-10", s: "NASA", u: "https://www.nasa.gov/news-release/nasa-welcomes-record-setting-artemis-ii-moonfarers-back-to-earth/",
+      es: ["Artemis II vuelve de la Luna", "Cuatro astronautas completaron un viaje de 10 días alrededor de la Luna y cayeron al Pacífico, frente a California, el 10 de abril."],
+      en: ["Artemis II returns from the Moon", "Four astronauts finished a 10-day trip around the Moon and splashed down in the Pacific off California on April 10."] },
+    { d: "2026-02-22", s: "NBC Olympics", u: "https://www.nbcolympics.com/post/327116",
+      es: ["Milán-Cortina 2026: Noruega manda", "Noruega terminó primera con 18 oros y 41 medallas. Estados Unidos logró 12 oros, su mejor marca en unos Juegos de Invierno."],
+      en: ["Milano Cortina 2026: Norway on top", "Norway finished first with 18 golds and 41 medals. The United States won 12 golds, its best total at a Winter Games."] }
+  ];
+  var NOTE = { es: "Titulares guardados el 24 de noviembre de 2026. Esta página no se actualiza sola.", en: "News is shown in English. Headlines saved on November 24, 2026; this page does not update itself." };
+  function renderNews() {
+    var out = "", i, n, e = li === 0 ? "es" : "en";
+    for (i = 0; i < NEWS.length; i++) {
+      n = NEWS[i];
+      out += '<div class="news"><div class="dt">' + n.d + "</div><h3>" + n[e][0] + "</h3><p>" + n[e][1] + '</p><a href="' + n.u + '" target="_blank">' + tr("src") + ": " + n.s + "</a></div>";
+    }
+    $("news").innerHTML = out;
+    st($("news-note"), NOTE[e]);
+  }
+  function tr(k) { var v = T[k]; return typeof v === "string" ? v : v[li]; }
+  var redraw = function () {};
+  function setLang(i) {
+    var els = d.getElementsByTagName("*"), n, k;
+    li = i;
+    for (n = 0; n < els.length; n++) {
+      k = els[n].getAttribute ? els[n].getAttribute("data-t") : null;
+      if (k && T[k]) { st(els[n], tr(k)); }
+    }
+    d.documentElement.lang = L[i];
+    renderNews();
+    try { localStorage.setItem("dw_lang", String(i)); } catch (e) {}
+    redraw();
+  }
+  var saved = null, j, nl;
+  try { saved = localStorage.getItem("dw_lang"); } catch (e2) {}
+  if (saved === null) {
+    nl = String(navigator.language || navigator.userLanguage || "es").substr(0, 2).toLowerCase();
+    for (j = 0; j < L.length; j++) { if (L[j] === nl) { saved = j; } }
+  }
+  li = parseInt(saved === null ? 0 : saved, 10);
+  if (isNaN(li) || li < 0 || li > 9) { li = 0; }
+  $("lang").selectedIndex = li;
+  on($("lang"), "change", function () { setLang(this.selectedIndex); });
+  setLang(li);
+
+  /* ---------- Panel en vivo ---------- */
+  function tick() { var t = new Date(); st($("clock"), pad(t.getHours()) + ":" + pad(t.getMinutes()) + ":" + pad(t.getSeconds())); }
+  tick(); setInterval(tick, 1000);
+  var ua = navigator.userAgent, name = "?";
+  if (/MSIE (\d+)/.test(ua) || /Trident\/.*rv:(\d+)/.test(ua)) { name = "Internet Explorer " + RegExp.$1; }
+  else if (/SamsungBrowser\/([\d.]+)/.test(ua)) { name = "Samsung Browser " + RegExp.$1; }
+  else if (/Edge\/(\d+)/.test(ua)) { name = "Edge " + RegExp.$1; }
+  else if (/Firefox\/(\d+)/.test(ua)) { name = "Firefox " + RegExp.$1; }
+  else if (/Chrome\/(\d+)/.test(ua)) { name = "Chrome " + RegExp.$1; }
+  else if (/Android/.test(ua) && /Version\/([\d.]+)/.test(ua)) { name = "Android " + RegExp.$1; }
+  else if (/Safari\//.test(ua)) { name = "Safari"; }
+  st($("d-nav"), name);
+  st($("d-scr"), window.screen ? screen.width + " x " + screen.height : "?");
+
+  /* ---------- Contacto ---------- */
+  on($("send"), "click", function () {
+    var m = $("fmsg"), blank = /^\s*$/;
+    if (blank.test($("f-name").value) || blank.test($("f-txt").value) || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test($("f-mail").value)) {
+      m.style.color = "#c1121f"; st(m, tr("c_err"));
+    } else { m.style.color = "#1b7f43"; st(m, tr("c_ok")); }
+  });
+
+  /* ---------- Canvas: juegos y Paint ---------- */
+  var cvS = $("cv-snake"), cvD = $("cv-dash"), cvP = $("cv-paint");
+  var ok = !!(cvS.getContext);
+  var dc = $("d-cv"); st(dc, ok ? "OK" : "No"); dc.className = ok ? "ok" : "no";
+  if (!ok) { return; }
+
+  function overlay(g, w, h, over) {
+    g.fillStyle = "rgba(11,20,41,0.82)"; g.fillRect(0, 0, w, h);
+    g.textAlign = "center"; g.fillStyle = "#ffd166"; g.font = "bold 22px Arial,sans-serif";
+    g.fillText(over ? tr("over") : tr("start"), w / 2, h / 2 - 8);
+    if (over) { g.fillStyle = "#fff"; g.font = "16px Arial,sans-serif"; g.fillText(tr("start"), w / 2, h / 2 + 22); }
+  }
+  function inView(c) { var r = c.getBoundingClientRect(); return r.top < (d.documentElement.clientHeight || 600) && r.bottom > 0 && c.style.display !== "none"; }
+
+  /* Snake */
+  var sg = cvS.getContext("2d"), N = 20, C = 16, sn, dir, nd, food, sc, sTimer = null, sState = 0;
+  function sFood() {
+    var f, good, i;
+    do {
+      f = { x: Math.floor(Math.random() * N), y: Math.floor(Math.random() * N) }; good = true;
+      for (i = 0; i < sn.length; i++) { if (sn[i].x === f.x && sn[i].y === f.y) { good = false; } }
+    } while (!good);
+    return f;
+  }
+  function sReset() { sn = [{ x: 10, y: 10 }, { x: 9, y: 10 }, { x: 8, y: 10 }]; dir = { x: 1, y: 0 }; nd = dir; sc = 0; food = sFood(); st($("score"), 0); }
+  function sDraw() {
+    var i; sg.fillStyle = "#0b1429"; sg.fillRect(0, 0, 320, 320);
+    sg.fillStyle = "#ff6b6b"; sg.fillRect(food.x * C + 2, food.y * C + 2, C - 4, C - 4);
+    for (i = 0; i < sn.length; i++) { sg.fillStyle = i === 0 ? "#ffd166" : "#00b4d8"; sg.fillRect(sn[i].x * C + 1, sn[i].y * C + 1, C - 2, C - 2); }
+    if (sState !== 1) { overlay(sg, 320, 320, sState === 2); }
+  }
+  function sEnd() { clearInterval(sTimer); sTimer = null; sState = 2; sDraw(); }
+  function sStep() {
+    var h, i; dir = nd; h = { x: sn[0].x + dir.x, y: sn[0].y + dir.y };
+    if (h.x < 0 || h.y < 0 || h.x >= N || h.y >= N) { sEnd(); return; }
+    for (i = 0; i < sn.length; i++) { if (sn[i].x === h.x && sn[i].y === h.y) { sEnd(); return; } }
+    sn.unshift(h);
+    if (h.x === food.x && h.y === food.y) { sc++; st($("score"), sc); food = sFood(); } else { sn.pop(); }
+    sDraw();
+  }
+  function sStart() { if (sState === 1) { return; } sReset(); sState = 1; sTimer = setInterval(sStep, 110); sDraw(); }
+  function sKey(x, y) { if (sState !== 1) { sStart(); } if (x === -dir.x && y === -dir.y) { return; } nd = { x: x, y: y }; }
+
+  /* Dash (salto, pinchos y bloques) */
+  var dg = cvD.getContext("2d"), dState = 0, dTimer = null, py, vy, dsp, dist, obs, nxt, rot;
+  function dReset() { py = 160; vy = 0; dsp = 5; dist = 0; obs = []; nxt = 300; rot = 0; st($("score"), 0); }
+  function dDraw() {
+    var i, k, o; dg.fillStyle = "#0b1429"; dg.fillRect(0, 0, 480, 240);
+    dg.fillStyle = "#1d3557"; dg.fillRect(0, 190, 480, 50); dg.fillStyle = "#00b4d8"; dg.fillRect(0, 190, 480, 3);
+    for (i = 0; i < obs.length; i++) {
+      o = obs[i];
+      if (o.t) { dg.fillStyle = "#ff6b6b"; dg.fillRect(o.x, 160, o.w, 30); }
+      else {
+        dg.fillStyle = "#ffd166";
+        for (k = 0; k < o.w / 30; k++) { dg.beginPath(); dg.moveTo(o.x + k * 30, 190); dg.lineTo(o.x + k * 30 + 15, 160); dg.lineTo(o.x + k * 30 + 30, 190); dg.closePath(); dg.fill(); }
+      }
+    }
+    dg.save(); dg.translate(85, py + 15); dg.rotate(rot);
+    dg.fillStyle = "#fff"; dg.fillRect(-15, -15, 30, 30); dg.fillStyle = "#14213d"; dg.fillRect(-9, -8, 6, 6); dg.fillRect(3, -8, 6, 6);
+    dg.restore();
+    if (dState !== 1) { overlay(dg, 480, 240, dState === 2); }
+  }
+  function dEnd() { clearInterval(dTimer); dTimer = null; dState = 2; dDraw(); }
+  function dStep() {
+    var i, o, top;
+    dist += dsp; dsp += 0.002; vy += 0.65; py += vy;
+    if (py >= 160) { py = 160; vy = 0; rot = 0; } else { rot += 0.11; }
+    nxt -= dsp;
+    if (nxt <= 0) { obs.push({ x: 480, w: Math.random() < 0.4 ? 60 : 30, t: Math.random() < 0.3 ? 1 : 0 }); nxt = 260 + Math.random() * 160 + dsp * 15; }
+    for (i = obs.length - 1; i >= 0; i--) {
+      o = obs[i]; o.x -= dsp;
+      if (o.x + o.w < 0) { obs.splice(i, 1); continue; }
+      top = o.t ? 160 : 172;
+      if (96 > o.x + (o.t ? 0 : 6) && 74 < o.x + o.w - (o.t ? 0 : 6) && py + 30 > top + 2) { dEnd(); return; }
+    }
+    st($("score"), Math.floor(dist / 10));
+    dDraw();
+  }
+  function dJump() {
+    if (dState !== 1) { dReset(); dState = 1; dTimer = setInterval(dStep, 16); return; }
+    if (py >= 160) { vy = -11.5; }
+  }
+
+  /* Pong */
+  var cvO = $("cv-pong"), cvF = $("cv-flap");
+  var og = cvO.getContext("2d"), oState = 0, oTimer = null, oy, ay, bx, by, bvx, bvy, osc, olives, ky = 0;
+  function oServe(dx) { bx = 240; by = 150; bvx = dx * (4 + Math.min(osc, 10) * 0.3); bvy = (Math.random() < 0.5 ? -1 : 1) * (2 + Math.random() * 2); }
+  function oReset() { oy = 120; ay = 120; osc = 0; olives = 3; oServe(1); st($("score"), 0); }
+  function oDraw() {
+    var i; og.fillStyle = "#0b1429"; og.fillRect(0, 0, 480, 300);
+    og.fillStyle = "#24365f"; for (i = 0; i < 300; i += 20) { og.fillRect(238, i, 4, 10); }
+    og.fillStyle = "#00b4d8"; og.fillRect(12, oy, 10, 60);
+    og.fillStyle = "#ff6b6b"; og.fillRect(458, ay, 10, 60);
+    og.fillStyle = "#ffd166"; og.fillRect(bx - 6, by - 6, 12, 12);
+    for (i = 0; i < olives; i++) { og.fillRect(12 + i * 16, 10, 10, 10); }
+    if (oState !== 1) { overlay(og, 480, 300, oState === 2); }
+  }
+  function oEnd() { clearInterval(oTimer); oTimer = null; oState = 2; oDraw(); }
+  function oStep() {
+    var c = ay + 30;
+    oy = Math.max(0, Math.min(240, oy + ky * 6));
+    if (by < c - 6) { ay -= 3.2; } else if (by > c + 6) { ay += 3.2; }
+    ay = Math.max(0, Math.min(240, ay));
+    bx += bvx; by += bvy;
+    if (by < 6) { by = 6; bvy = -bvy; } if (by > 294) { by = 294; bvy = -bvy; }
+    if (bvx < 0 && bx - 6 <= 22 && bx > 10 && by > oy - 6 && by < oy + 66) {
+      bvx = Math.min(11, -bvx * 1.05); bvy += (by - (oy + 30)) * 0.12; bvy = Math.max(-7, Math.min(7, bvy)); bx = 29;
+    }
+    if (bvx > 0 && bx + 6 >= 458 && bx < 470 && by > ay - 6 && by < ay + 66) { bvx = -bvx; bx = 451; }
+    if (bx < -10) { olives--; if (olives <= 0) { oEnd(); return; } oServe(1); }
+    else if (bx > 490) { osc++; st($("score"), osc); oServe(-1); }
+    oDraw();
+  }
+  function oStart() { if (oState === 1) { return; } oReset(); oState = 1; oTimer = setInterval(oStep, 16); }
+
+  /* Flappy */
+  var fg = cvF.getContext("2d"), fState = 0, fTimer = null, fy, fv, pipes, fsc, fnx;
+  function fReset() { fy = 180; fv = 0; pipes = []; fsc = 0; fnx = 0; st($("score"), 0); }
+  function fDraw() {
+    var i, p; fg.fillStyle = "#0b1429"; fg.fillRect(0, 0, 320, 400);
+    fg.fillStyle = "#2a9d8f";
+    for (i = 0; i < pipes.length; i++) { p = pipes[i]; fg.fillRect(p.x, 0, 50, p.g); fg.fillRect(p.x, p.g + 110, 50, 380 - p.g - 110); }
+    fg.fillStyle = "#1d3557"; fg.fillRect(0, 380, 320, 20); fg.fillStyle = "#00b4d8"; fg.fillRect(0, 380, 320, 3);
+    fg.fillStyle = "#ffd166"; fg.beginPath(); fg.arc(80, fy, 12, 0, 6.2832, false); fg.fill();
+    fg.fillStyle = "#14213d"; fg.fillRect(84, fy - 6, 4, 4);
+    if (fState !== 1) { overlay(fg, 320, 400, fState === 2); }
+  }
+  function fEnd() { clearInterval(fTimer); fTimer = null; fState = 2; fDraw(); }
+  function fStep() {
+    var i, p; fv += 0.42; fy += fv; fnx -= 2.6;
+    if (fnx <= 0) { pipes.push({ x: 320, g: 80 + Math.random() * 180, s: 0 }); fnx = 170; }
+    for (i = pipes.length - 1; i >= 0; i--) {
+      p = pipes[i]; p.x -= 2.6;
+      if (p.x + 50 < 0) { pipes.splice(i, 1); continue; }
+      if (!p.s && p.x + 50 < 68) { p.s = 1; fsc++; st($("score"), fsc); }
+      if (91 > p.x && 69 < p.x + 50 && (fy - 11 < p.g || fy + 11 > p.g + 110)) { fEnd(); return; }
+    }
+    if (fy + 11 >= 380 || fy - 11 < 0) { fEnd(); return; }
+    fDraw();
+  }
+  function fFlap() { if (fState !== 1) { fReset(); fState = 1; fTimer = setInterval(fStep, 16); } fv = -7.2; }
+
+  /* Memoria */
+  var mem = $("mem"), mFirst = null, mLock = false, mFound = 0, MS = "ABCDEFGH", MC = ["#e63946", "#ff9f1c", "#2a9d8f", "#00b4d8", "#7b2cbf", "#8d5524", "#1b7f43", "#c1121f"];
+  function mShow(c) { var v = parseInt(c.getAttribute("data-v"), 10); c.setAttribute("data-s", "1"); c.className = "mc up"; st(c, MS.charAt(v)); c.style.color = MC[v]; }
+  function mHide(c) { c.setAttribute("data-s", "0"); c.className = "mc"; st(c, ""); }
+  function mFlip() {
+    var c = this, a;
+    if (mLock || c.getAttribute("data-s") !== "0") { return; }
+    mShow(c);
+    if (!mFirst) { mFirst = c; return; }
+    if (mFirst.getAttribute("data-v") === c.getAttribute("data-v")) {
+      mFirst.setAttribute("data-s", "2"); c.setAttribute("data-s", "2"); mFirst = null; mFound++; st($("score"), mFound);
+      if (mFound === 8) { st($("mmsg"), tr("won")); }
+    } else {
+      mLock = true; a = mFirst; mFirst = null;
+      setTimeout(function () { mHide(a); mHide(c); mLock = false; }, 700);
+    }
+  }
+  function mBuild() {
+    var a = [], i, r, t, c;
+    for (i = 0; i < 16; i++) { a.push(i % 8); }
+    for (i = 15; i > 0; i--) { r = Math.floor(Math.random() * (i + 1)); t = a[i]; a[i] = a[r]; a[r] = t; }
+    mem.innerHTML = ""; mFirst = null; mLock = false; mFound = 0; st($("score"), 0); st($("mmsg"), "");
+    for (i = 0; i < 16; i++) { c = d.createElement("div"); c.className = "mc"; c.setAttribute("data-v", a[i]); c.setAttribute("data-s", "0"); on(c, "click", mFlip); mem.appendChild(c); }
+  }
+
+  /* Pestañas */
+  var cur = "snake", G = ["snake", "dash", "pong", "flap", "mem"], E = { snake: cvS, dash: cvD, pong: cvO, flap: cvF, mem: $("mwrap") }, ti;
+  redraw = function () { if (cur === "snake") { sDraw(); } else if (cur === "dash") { dDraw(); } else if (cur === "pong") { oDraw(); } else if (cur === "flap") { fDraw(); } };
+  function show(g) {
+    var i;
+    cur = g;
+    if (sTimer) { clearInterval(sTimer); sTimer = null; }
+    if (dTimer) { clearInterval(dTimer); dTimer = null; }
+    if (oTimer) { clearInterval(oTimer); oTimer = null; }
+    if (fTimer) { clearInterval(fTimer); fTimer = null; }
+    sState = 0; dState = 0; oState = 0; fState = 0; ky = 0;
+    sReset(); dReset(); oReset(); fReset();
+    if (g === "mem") { mBuild(); }
+    for (i = 0; i < G.length; i++) {
+      E[G[i]].style.display = G[i] === g ? "block" : "none";
+      $("t-" + G[i]).className = G[i] === g ? "tab on" : "tab";
+    }
+    redraw();
+  }
+  function bindTab(g) { on($("t-" + g), "click", function () { this.blur(); show(g); }); }
+  for (ti = 0; ti < G.length; ti++) { bindTab(G[ti]); }
+  show("snake");
+
+  /* Teclado */
+  on(d, "keydown", function (e) {
+    var k = e.keyCode || e.which, tg = (e.target || e.srcElement).tagName, act = false;
+    if (tg === "INPUT" || tg === "TEXTAREA" || tg === "SELECT") { return; }
+    if (cur === "snake" && inView(cvS)) {
+      if (k === 37) { sKey(-1, 0); act = true; } else if (k === 38) { sKey(0, -1); act = true; }
+      else if (k === 39) { sKey(1, 0); act = true; } else if (k === 40) { sKey(0, 1); act = true; }
+      else if (k === 32 || k === 13) { sStart(); act = true; }
+    } else if (cur === "dash" && inView(cvD) && (k === 32 || k === 38 || k === 13)) { dJump(); act = true; }
+    else if (cur === "flap" && inView(cvF) && (k === 32 || k === 38 || k === 13)) { fFlap(); act = true; }
+    else if (cur === "pong" && inView(cvO)) {
+      if (k === 38 || k === 40) { ky = k === 38 ? -1 : 1; oStart(); act = true; } else if (k === 32 || k === 13) { oStart(); act = true; }
+    }
+    if (act) { pd(e); }
+  });
+  on(d, "keyup", function (e) { var k = e.keyCode || e.which; if (k === 38 || k === 40) { ky = 0; } });
+
+  /* Tactil y raton: Snake */
+  var x0 = 0, y0 = 0;
+  on(cvS, "touchstart", function (e) { pd(e); x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; });
+  on(cvS, "touchmove", pd);
+  on(cvS, "touchend", function (e) {
+    var t = e.changedTouches[0], dx = t.clientX - x0, dy = t.clientY - y0;
+    pd(e);
+    if (Math.abs(dx) < 12 && Math.abs(dy) < 12) { sStart(); return; }
+    if (Math.abs(dx) > Math.abs(dy)) { sKey(dx > 0 ? 1 : -1, 0); } else { sKey(0, dy > 0 ? 1 : -1); }
+  });
+  on(cvS, "click", function () { sStart(); });
+  /* Dash */
+  on(cvD, "mousedown", function () { dJump(); });
+  on(cvD, "touchstart", function (e) { pd(e); dJump(); });
+  on(cvD, "touchmove", pd);
+
+  /* Pong y Flappy: raton y tactil */
+  function oPos(e) {
+    var r = cvO.getBoundingClientRect(), t = (e.touches && e.touches.length) ? e.touches[0] : e;
+    oy = Math.max(0, Math.min(240, (t.clientY - r.top) * (300 / r.height) - 30));
+  }
+  on(cvO, "mousemove", oPos); on(cvO, "click", function () { oStart(); });
+  on(cvO, "touchstart", function (e) { pd(e); oPos(e); oStart(); }); on(cvO, "touchmove", function (e) { pd(e); oPos(e); });
+  on(cvF, "mousedown", function () { fFlap(); });
+  on(cvF, "touchstart", function (e) { pd(e); fFlap(); }); on(cvF, "touchmove", pd);
+
+  /* Paint */
+  var pg = cvP.getContext("2d"), cols = ["#14213d", "#e63946", "#ff9f1c", "#ffd166", "#2a9d8f", "#00b4d8", "#7b2cbf", "#8d5524"];
+  var col = cols[0], size = 6, erase = false, down = false, lp = null, sw = $("sw"), b, q;
+  function wipe() { pg.fillStyle = "#fff"; pg.fillRect(0, 0, 560, 320); }
+  function mark() {
+    var s = sw.childNodes, z;
+    for (z = 0; z < s.length; z++) { s[z].className = (!erase && s[z].getAttribute("data-c") === col) ? "swc on" : "swc"; }
+    $("p-brush").className = erase ? "tab" : "tab on"; $("p-erase").className = erase ? "tab on" : "tab"; st($("p-size"), size);
+  }
+  function pick() { col = this.getAttribute("data-c"); erase = false; mark(); }
+  for (q = 0; q < cols.length; q++) {
+    b = d.createElement("span"); b.className = "swc"; b.style.background = cols[q]; b.setAttribute("data-c", cols[q]);
+    on(b, "click", pick); sw.appendChild(b);
+  }
+  function pos(e) {
+    var r = cvP.getBoundingClientRect(), t = (e.touches && e.touches.length) ? e.touches[0] : e;
+    return { x: (t.clientX - r.left) * (cvP.width / r.width), y: (t.clientY - r.top) * (cvP.height / r.height) };
+  }
+  function line(a, c) {
+    pg.strokeStyle = erase ? "#fff" : col; pg.lineWidth = size; pg.lineCap = "round"; pg.lineJoin = "round";
+    pg.beginPath(); pg.moveTo(a.x, a.y); pg.lineTo(c.x, c.y); pg.stroke();
+  }
+  function pStart(e) { var p; pd(e); p = pos(e); down = true; lp = p; line(p, { x: p.x + 0.01, y: p.y }); }
+  function pMove(e) { var p; if (!down) { return; } pd(e); p = pos(e); line(lp, p); lp = p; }
+  function pEnd() { down = false; }
+  on(cvP, "mousedown", pStart); on(cvP, "mousemove", pMove); on(d, "mouseup", pEnd);
+  on(cvP, "touchstart", pStart); on(cvP, "touchmove", pMove); on(cvP, "touchend", pEnd); on(cvP, "touchcancel", pEnd);
+  on($("p-brush"), "click", function () { this.blur(); erase = false; mark(); });
+  on($("p-erase"), "click", function () { this.blur(); erase = true; mark(); });
+  on($("p-minus"), "click", function () { this.blur(); size = Math.max(2, size - 2); mark(); });
+  on($("p-plus"), "click", function () { this.blur(); size = Math.min(40, size + 2); mark(); });
+  on($("p-clear"), "click", function () { this.blur(); wipe(); });
+  wipe(); mark();
+})();
+</script>
+</body>
+</html>
